@@ -25,31 +25,22 @@ public class ParkingTicket {
 		boolean freeDay = false;
 		// get total from days
 		if(hasFreeDayRule) {
-			total += (d - d/freeDayEvery) * maxDaily;
-			freeDay = ((d+1)%freeDayEvery) == 0;
+			total += (d-d/freeDayEvery)*maxDaily;
+			freeDay = ((d+1)%freeDayEvery)==0;
 		} else {
-			total += d * maxDaily;
+			total += d*maxDaily;
 		}
 		// get total from remainder
-		if(d==0) {
-			if((h>=maxHoursADay && m>freeTime) || h>maxHoursADay) {
-				// if we're over the max daily charge
-				total += maxDaily;
-			} else {
-				// pay per hour minus complimentary time
-				total += (h+(m/(freeTime+1)))*hrRate; 
-			}
-		} else if(!freeDay){ // not a free day? you're gonna pay for it
-			if((h>=maxHoursADay && m>0) || h>maxHoursADay) {
+		int minmumMin = d==0?freeTime:0;
+		if(!freeDay){ // not a free day? you're gonna pay for it
+			if((h>=maxHoursADay && m>minmumMin) || h>maxHoursADay) {
 				// if we're over the max daily charge
 				total += maxDaily;
 			} else {
 				// pay per hour minus complimentary time
 				total += (h+(m>0?1:0))*hrRate; 
 			}
-			
 		}
-		
 		return total;
 	}
 	
