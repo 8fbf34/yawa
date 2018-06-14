@@ -40,7 +40,7 @@ public class ParkingTicket {
 				total += (h+(m/(freeTime+1)))*hrRate; 
 			}
 		} else if(!freeDay){ // not a free day? you're gonna pay for it
-			if((h>=maxHoursADay && m>freeTime) || h>maxHoursADay) {
+			if((h>=maxHoursADay && m>0) || h>maxHoursADay) {
 				// if we're over the max daily charge
 				total += maxDaily;
 			} else {
